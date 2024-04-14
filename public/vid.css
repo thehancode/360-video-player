@@ -1,0 +1,8 @@
+.video-js .vjs-big-play-button {
+    display: none;
+}
+
+.video-js {
+    width: 100vw;
+    height: 100vh;
+}
