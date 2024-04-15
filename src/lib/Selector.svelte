@@ -91,6 +91,7 @@
     text-align: center;
     width: 100%;
     height: 50vh;
+    padding-top: 8vh;
     flex-grow: 0;
     font-size: 7vh;
     color: antiquewhite;
