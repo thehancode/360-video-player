@@ -17,6 +17,7 @@
 <main class="container">
   {#if selectedPath}
     <Vid path={selectedPath} />
+    <Overlay />
   {:else}
     <Selector on:pathSelected={handlePathSelected} />
   {/if}

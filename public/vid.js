@@ -1,6 +1,7 @@
 (function (window, videojs) {
     let player = window.player = videojs('my-video', {
         controls: true,
+        autoplay: true,
         controlBar: {
             pictureInPictureToggle: false,
             fullscreenToggle: false,
