@@ -6,8 +6,8 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "vid",
-    "version": "0.0.0"
+    "productName": "360-video-player",
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -19,9 +19,7 @@
     },
     "windows": [
       {
-        "title": "vid",
-        "width": 800,
-        "height": 600,
+        "title": "360-video-player",
         "fileDropEnabled": false
       }
     ],
@@ -33,11 +31,8 @@
       "targets": "all",
       "identifier": "com.tauri.dev",
       "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
+        "icons/logo.png",
+        "icons/logo.ico"
       ]
     }
   }

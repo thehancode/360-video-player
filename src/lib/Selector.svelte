@@ -47,7 +47,7 @@
       <img class="logo" src="/logo.svg" alt="Logo" />
     </div>
     <div class="item-text">
-      <div>Drop file to play here.</div>
+      <div>Click or drop file to play here.</div>
     </div>
     <input type="file" bind:this={fileInput} style="display: none;" />
   </div>
