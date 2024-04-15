@@ -47,7 +47,7 @@
       <img class="logo" src="/logo.svg" alt="Logo" />
     </div>
     <div class="item-text">
-      <div>Click or drop file to play here.</div>
+      <div class="item">Click or drop file to play here.</div>
     </div>
     <input type="file" bind:this={fileInput} style="display: none;" />
   </div>
@@ -91,10 +91,12 @@
     text-align: center;
     width: 100%;
     height: 50vh;
-    padding-top: 8vh;
     flex-grow: 0;
     font-size: 7vh;
     color: antiquewhite;
+  }
+  .item {
+    margin-top: 10vh;
   }
 
   .logo {
