@@ -44,7 +44,7 @@
 <div>
   <div class="container" bind:this={container}>
     <div class="item-logo">
-      <img class="logo" src="/logo.svg" />
+      <img class="logo" src="/logo.svg" alt="Logo" />
     </div>
     <div class="item-text">
       <div>Drop file to play here.</div>

@@ -9,6 +9,7 @@
   <link href="dist/video-js.css" rel="stylesheet" />
   <link href="dist-vr/videojs-vr.css" rel="stylesheet" />
   <link rel="stylesheet" href="vid.css" />
+  <link rel="stylesheet" href="fantasy.css" />
 </svelte:head>
 
 <div class="video-container">
@@ -16,7 +17,7 @@
   <video
     id="my-video"
     crossorigin="anonymous"
-    class="vid-js video-js vjs-default-skin"
+    class="vid-js video-js vjs-theme-fantasy"
     controls
     disablePictureInPicture
     preload="auto"
