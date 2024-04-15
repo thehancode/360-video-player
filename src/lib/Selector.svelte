@@ -6,6 +6,16 @@
 
   const dispatch = createEventDispatcher();
 
+  function handleFileSelect(file: File | undefined) {
+    if (!file) {
+      console.warn("No file selected");
+      return;
+    }
+
+    const fileURL = URL.createObjectURL(file);
+    dispatch("pathSelected", fileURL);
+  }
+
   onMount(() => {
     container.addEventListener("click", () => {
       fileInput.click();
@@ -14,14 +24,19 @@
     fileInput.addEventListener("change", (event: Event) => {
       const target = event.target as HTMLInputElement;
       const file = target.files?.[0];
+      handleFileSelect(file);
+    });
 
-      if (!file) {
-        console.warn("No file selected");
-        return;
-      }
+    container.addEventListener("dragover", (event: DragEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+    });
 
-      const fileURL = URL.createObjectURL(file);
-      dispatch("pathSelected", fileURL);
+    container.addEventListener("drop", (event: DragEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const file = event.dataTransfer?.files[0];
+      handleFileSelect(file);
     });
   });
 </script>
