@@ -1,6 +1,7 @@
 .vjs-theme-fantasy {
-  --vjs-theme-fantasy--primary: #9f44b4;
+  --vjs-theme-fantasy--primary: #4d8ab3;
   --vjs-theme-fantasy--secondary: #fff;
+  --vjs-theme-fantasy--tertiary: #7a652b;
 }
 
 .vjs-theme-fantasy .vjs-big-play-button {
@@ -27,7 +28,7 @@
   height: 54px;
 }
 
-.vjs-theme-fantasy .vjs-button > .vjs-icon-placeholder::before {
+.vjs-theme-fantasy .vjs-button>.vjs-icon-placeholder::before {
   line-height: 54px;
 }
 
@@ -51,6 +52,10 @@
 
 .vjs-theme-city .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-horizontal {
   height: 100%;
+}
+
+.video-js .vjs-volume-panel .vjs-volume-control {
+  margin-left: -10px;
 }
 
 .vjs-theme-fantasy .vjs-progress-control .vjs-progress-holder {
@@ -77,7 +82,8 @@
 }
 
 .vjs-theme-fantasy .vjs-play-progress {
-  background-color: var(--vjs-theme-fantasy--primary);
+  background: linear-gradient(to right, var(--vjs-theme-fantasy--tertiary) 0%,
+      var(--vjs-theme-fantasy--primary) 100%);
 }
 
 .vjs-theme-fantasy .vjs-play-progress::before {
