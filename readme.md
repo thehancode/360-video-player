@@ -1,6 +1,6 @@
 <div align="center">
 	<br>
-	  <p><a href="https://github.com/jesucode/360-video-player"><img src="static/logo.svg" width="140" alt="360-video-player" /></a></p>
+	  <p><a href="https://github.com/thehancode/360-video-player/"><img src="public/logo.svg" width="140" alt="360-video-player" /></a></p>
   <p><b>360-video-player</b></p>
  Play It Your Way in your Cinema Sphere 
 </div>
