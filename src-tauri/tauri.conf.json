@@ -15,16 +15,32 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "fs": {
+        "all": true,
+        "scope": [
+          "$APP/*",
+          "$DESKTOP/*"
+        ]
+      },
+      "dialog": {
+        "all": true
+      },
+      "protocol": {
+        "all": true,
+        "asset": true,
+        "assetScope": [
+          "*"
+        ]
       }
     },
     "windows": [
       {
-        "title": "360-video-player",
-        "fileDropEnabled": false
+        "title": "360-video-player"
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; img-src 'self' https://* asset: https://asset.localhost tauri://localhost; media-src https://* asset: https://asset.localhost tauri://localhost; style-src-elem https://* asset: https://asset.localhost tauri://localhost; script-src-elem https://* asset: https://asset.localhost tauri://localhost;"
     },
     "bundle": {
       "active": true,
