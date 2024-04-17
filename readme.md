@@ -1,8 +1,8 @@
 <div align="center">
+	<h2>360-video-player</h2>
 	<br>
 	  <p><a href="https://github.com/thehancode/360-video-player/"><img src="public/logo.svg" width="140" alt="360-video-player" /></a></p>
-  <p><b>360-video-player</b></p>
- Play It Your Way in your Cinema Sphere 
+	<p><a href="https://github.com/thehancode/360-video-player/releases"><img src="https://github.com/thehancode/360-video-player/assets/55881352/86003dd0-80ce-4ce9-a03b-f624ab197a35" height="35" alt="download" /></a></p>
 </div>
 
 https://github.com/thehancode/360-video-player/assets/55881352/135274ea-7906-4c1c-a857-0e5f4f207be8
