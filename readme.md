@@ -5,13 +5,11 @@
  Play It Your Way in your Cinema Sphere 
 </div>
 
-# 360 Video Player 
-360 Video Player is a local video player for 360 video. Simply drag your video file into the player to instantly immerse yourself in a 360-degree experience, all from the comfort of your own device. Designed with a focus on local playback, our player lets you explore a full 360-degree world without needing constant internet access. Enjoy seamless, high-quality playback of your favorite panoramic content, anytime, anywhere.
-
-
-
 https://github.com/thehancode/360-video-player/assets/55881352/135274ea-7906-4c1c-a857-0e5f4f207be8
 
+
+# 360 Video Player 
+360 Video Player is a local video player for 360 video. Simply drag your video file into the player to instantly immerse yourself in a 360-degree experience, all from the comfort of your own device. Designed with a focus on local playback, our player lets you explore a full 360-degree world without needing constant internet access. Enjoy seamless, high-quality playback of your favorite panoramic content, anytime, anywhere.
 
 ## Installation
 👋 Welcome to the installation guide for 360-Video-Player! Simply follow the instructions below for your operating system.
