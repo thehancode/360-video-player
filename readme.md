@@ -5,8 +5,8 @@
 	<p><a href="https://github.com/thehancode/360-video-player/releases"><img src="https://github.com/thehancode/360-video-player/assets/55881352/86003dd0-80ce-4ce9-a03b-f624ab197a35" height="35" alt="download" /></a></p>
 </div>
 
-https://github.com/thehancode/360-video-player/assets/55881352/135274ea-7906-4c1c-a857-0e5f4f207be8
 
+https://github.com/thehancode/360-video-player/assets/55881352/c1430680-230f-49fe-bd93-e759d362d24f
 
 # 360 Video Player 
 360 Video Player is a local video player for 360 video. Simply drag your video file into the player to instantly immerse yourself in a 360-degree experience, all from the comfort of your own device. Designed with a focus on local playback, our player lets you explore a full 360-degree world without needing constant internet access. Enjoy seamless, high-quality playback of your favorite panoramic content, anytime, anywhere.
@@ -16,8 +16,14 @@ https://github.com/thehancode/360-video-player/assets/55881352/135274ea-7906-4c1
 
 ### 🖥️ Windows 
 
+
+
+
 1. Head over to our [releases page](https://github.com/thehancode/360-video-player/releases) and download the `360-video-player_<version>.msi` file.
 2. Double-click the downloaded file and follow the installation wizard.
+
+
+
 
 ## 🐧 Ubuntu, Debian-based OS 
 1. Head over to our [releases page](https://github.com/thehancode/360-video-player/releases) and download the `360-video-player_<version>.deb` file.
