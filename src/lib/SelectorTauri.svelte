@@ -2,7 +2,7 @@
   import { createEventDispatcher, onMount } from "svelte";
   import { open } from "@tauri-apps/api/dialog";
   import { convertFileSrc } from "@tauri-apps/api/tauri";
-
+  import { listen } from "@tauri-apps/api/event";
   let container: HTMLDivElement;
 
   const dispatch = createEventDispatcher();
@@ -14,7 +14,7 @@
         filters: [
           {
             name: "Media",
-            extensions: ["mp4", "webm" , "mkv"],
+            extensions: ["mp4", "webm", "mkv"],
           },
         ],
       });
@@ -37,8 +37,13 @@
   onMount(() => {
     container.addEventListener("click", handleFileSelect);
 
-    window.addEventListener("tauri://file-drop", async (event: any) => {
-      const file = event.detail.file;
+    listen("tauri://file-drop", async (event: any) => {
+      if (event.payload.length === 0) {
+        console.warn("No file dropped");
+        return;
+      }
+      console.log("File dropped", event.payload[0]);
+      const file = event.payload[0];
       const fileURL = convertFileSrc(file);
       dispatch("pathSelected", fileURL);
     });
