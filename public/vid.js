@@ -15,7 +15,7 @@
     while (!player.vr){
         // ugly hack to wait for the VR plugin to load
         console.log('Waiting for VR');
-        await new Promise(r => setTimeout(r, 50));
+        await new Promise(r => setTimeout(r, 5));
     }
 
     window.vr = player.vr({ projection: 'AUTO', debug: true, forceCardboard: false });

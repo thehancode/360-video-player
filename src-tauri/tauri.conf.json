@@ -40,7 +40,7 @@
       }
     ],
     "security": {
-      "csp": "default-src 'self'; img-src 'self' https://* asset: https://asset.localhost tauri://localhost; media-src https://* asset: https://asset.localhost tauri://localhost; style-src-elem https://* asset: https://asset.localhost tauri://localhost; script-src-elem https://* asset: https://asset.localhost tauri://localhost;"
+      "csp": " default-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src unsafe-inline 'self' https://* asset: https://asset.localhost tauri://localhost; media-src https://* asset: https://asset.localhost tauri://localhost; style-src-elem 'unsafe-inline' https://* asset: https://asset.localhost tauri://localhost; script-src-elem 'unsafe-inline' https://* asset: https://asset.localhost tauri://localhost;"
     },
     "bundle": {
       "active": true,
