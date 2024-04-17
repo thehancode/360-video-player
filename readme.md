@@ -13,3 +13,8 @@
 
 ## Build yourself
  
+ ```
+ npm install 
+
+ npm run tauri build 
+```

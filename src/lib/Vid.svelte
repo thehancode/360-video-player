@@ -5,11 +5,11 @@
 <svelte:head>
   <script src="dist/video.js"></script>
   <script src="dist-vr/videojs-vr.js"></script>
-  <script src="vid.js"></script>
   <link href="dist/video-js.css" rel="stylesheet" />
   <link href="dist-vr/videojs-vr.css" rel="stylesheet" />
   <link rel="stylesheet" href="vid.css" />
   <link rel="stylesheet" href="fantasy.css" />
+  <script defer src="vid.js"></script>
 </svelte:head>
 
 <div class="video-container">
