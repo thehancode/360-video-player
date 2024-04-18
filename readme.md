@@ -23,23 +23,6 @@ https://github.com/thehancode/360-video-player/assets/55881352/c1430680-230f-49f
 2. Double-click the downloaded file and follow the installation wizard.
 
 
-
-
-## 🐧 Ubuntu, Debian-based OS 
-1. Head over to our [releases page](https://github.com/thehancode/360-video-player/releases) and download the `360-video-player_<version>.deb` file.
-2. Open a terminal and navigate to the directory containing the downloaded file.
-3. Run one of the following commands, replacing <version> with the name of your file. 
-
-`
-sudo dpkg -i 360-video-player_<version>.deb
-`
-
-or
-
-`
-sudo apt install ./360-video-player_<version>.deb
-`
-
 ## 🛠️ Build from source
 If you prefer to build the application from source, follow these steps:
 1. Clone the repository and navigate to the project directory.
