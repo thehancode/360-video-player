@@ -1,6 +1,6 @@
 <script lang="ts">
   import Vid from "./lib/Vid.svelte";
-  import Selector from "./lib/SelectorTauri.svelte";
+  import Selector from "./lib/Selector.svelte";
   import Overlay from "./lib/Overlay.svelte";
 
   let selectedPath: string = "";

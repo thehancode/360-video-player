@@ -36,7 +36,8 @@
     },
     "windows": [
       {
-        "title": "360-video-player"
+        "title": "360-video-player",
+        "fileDropEnabled": false
       }
     ],
     "security": {
