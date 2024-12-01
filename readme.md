@@ -11,7 +11,8 @@ https://github.com/thehancode/360-video-player/assets/55881352/c1430680-230f-49f
 	  <p><a href="https://github.com/thehancode/360-video-player/"><img src="public/logo.svg" width="140" alt="360-video-player" /></a></p>
 	<p><a href="https://github.com/thehancode/360-video-player/releases"><img src="https://github.com/thehancode/360-video-player/assets/55881352/86003dd0-80ce-4ce9-a03b-f624ab197a35" height="35" alt="download" /></a></p>
 </div>
-## Installation
+
+### Installation
 👋 Welcome to the installation guide for 360-Video-Player! Simply follow the instructions below for your operating system.
 
 ### 🖥️ Windows 
