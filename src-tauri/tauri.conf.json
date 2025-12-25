@@ -32,6 +32,9 @@
         "assetScope": [
           "*"
         ]
+      },
+      "globalShortcut": {
+        "all": true
       }
     },
     "windows": [
