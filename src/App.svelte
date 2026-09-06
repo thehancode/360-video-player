@@ -1,35 +1,36 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import Vid from "./lib/Vid.svelte";
-  import Selector from "./lib/SelectorTauri.svelte";
+  import Selector from "./lib/SelectorElectron.svelte";
   import Overlay from "./lib/Overlay.svelte";
 
   let selectedPath: string = "";
 
   function handlePathSelected(event: CustomEvent<string>) {
-    console.log(JSON.stringify(event));
-    console.log(event);
-    console.log(event.detail);
-
     selectedPath = event.detail;
   }
+
+  function handleClose() {
+    selectedPath = "";
+  }
+
+  onMount(async () => {
+    try {
+      const initial = await window.videoPlayer?.getInitialVideo?.();
+      if (initial) {
+        selectedPath = initial;
+      }
+    } catch (e) {
+      console.warn("Could not load initial video argument:", e);
+    }
+  });
 </script>
 
 <main class="container">
   {#if selectedPath}
     <Vid path={selectedPath} />
-    <Overlay />
+    <Overlay on:close={handleClose} />
   {:else}
     <Selector on:pathSelected={handlePathSelected} />
   {/if}
 </main>
-
-<svelte:head>
-  <script src="dist-vid/video.js"></script>
-  <link href="dist-vid/video-js.css" rel="stylesheet" />
-  <link href="dist-vr/videojs-vr.css" rel="stylesheet" />
-  <link rel="stylesheet" href="fantasy.css" />
-  <link rel="stylesheet" href="vid.css" />
-</svelte:head>
-
-<style>
-</style>

@@ -24,13 +24,19 @@ https://github.com/thehancode/360-video-player/assets/55881352/c1430680-230f-49f
 2. Double-click the downloaded file and follow the installation wizard.
 
 
-## 🛠️ Build from source
+## 🛠️ Build and Run from source
 If you prefer to build the application from source, follow these steps:
 1. Clone the repository and navigate to the project directory.
 2. Run the following commands: 
 
-```
+```bash
+# Install dependencies
 npm install
-npm run tauri build
+
+# Start development mode (Vite + Electron)
+npm run dev
+
+# Build production packages (AppImage & deb)
+npm run electron:build
 ```
-3. The built files will be available in the `360-video-player\src-tauri\target\release` directory. 
+3. The built distribution files will be generated in the `release/` directory. 

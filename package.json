@@ -2,24 +2,35 @@
   "name": "vid",
   "private": true,
   "version": "1.0.2",
+  "description": "A local 360-degree video player.",
+  "desktopName": "360-video-player",
+  "author": {
+    "name": "hancode",
+    "email": "55881352+thehancode@users.noreply.github.com"
+  },
   "type": "module",
+  "main": "electron/main.cjs",
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run electron:dev",
+    "dev:vite": "vite --host 127.0.0.1",
+    "dev:main": "wait-on http://127.0.0.1:1420 && cross-env ELECTRON_RENDERER_URL=http://127.0.0.1:1420 electron --no-sandbox .",
+    "electron:dev": "concurrently -k \"npm:dev:vite\" \"npm:dev:main\"",
+    "start": "electron --no-sandbox .",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "tauri": "tauri"
+    "electron:build": "npm run build && electron-builder",
+    "electron:build:linux": "npm run build && electron-builder --linux deb AppImage"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1",
     "video.js": "^8.10.0",
     "videojs-vr": "^2.0.0"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
-    "@tauri-apps/cli": "^1",
     "@tsconfig/svelte": "^5.0.2",
     "concurrently": "^10.0.5",
+    "cross-env": "^10.1.0",
     "electron": "^44.2.0",
     "electron-builder": "^26.15.3",
     "svelte": "^4.2.8",
@@ -28,5 +39,28 @@
     "typescript": "^5.0.2",
     "vite": "^5.0.0",
     "wait-on": "^9.1.0"
+  },
+  "build": {
+    "appId": "com.hancode.360-video-player",
+    "productName": "360 Video Player",
+    "directories": {
+      "output": "release"
+    },
+    "icon": "public/logo.png",
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "deb",
+        "AppImage"
+      ],
+      "category": "AudioVideo",
+      "executableArgs": [
+        "--no-sandbox"
+      ]
+    }
   }
 }

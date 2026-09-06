@@ -1,28 +1,41 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
 
+    const dispatch = createEventDispatcher<{ close: void }>();
     let barContainer: HTMLDivElement;
-    let timeoutId: number;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
     function hideBarContainer() {
-        barContainer.classList.add("fade");
+        barContainer?.classList.add("fade");
     }
 
     function showBarContainer() {
-        barContainer.classList.remove("fade");
+        barContainer?.classList.remove("fade");
     }
+
     function resetTimeout() {
         clearTimeout(timeoutId);
         showBarContainer();
-        timeoutId = setTimeout(hideBarContainer, 1000);
+        timeoutId = setTimeout(hideBarContainer, 1500);
     }
+
+    function handleClose(event: MouseEvent) {
+        event.preventDefault();
+        dispatch("close");
+    }
+
     onMount(() => {
-        timeoutId = setTimeout(hideBarContainer, 1000);
+        timeoutId = setTimeout(hideBarContainer, 1500);
+        window.addEventListener("mousemove", resetTimeout);
+        return () => {
+            clearTimeout(timeoutId);
+            window.removeEventListener("mousemove", resetTimeout);
+        };
     });
 </script>
 
 <div bind:this={barContainer} class="bar-container">
-    <a href="index.html"> x </a>
+    <a href="index.html" on:click={handleClose}> x </a>
 </div>
 
 <style>
