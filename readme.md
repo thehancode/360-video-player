@@ -25,42 +25,12 @@ https://github.com/thehancode/360-video-player/assets/55881352/c1430680-230f-49f
 
 
 ## 🛠️ Build from source
-This desktop app uses Tauri 2. Install Node.js 22+, npm, and stable Rust/Cargo first.
+If you prefer to build the application from source, follow these steps:
+1. Clone the repository and navigate to the project directory.
+2. Run the following commands: 
 
-On Ubuntu 24.04/26.04, install the Linux build libraries and video codecs:
-
-```bash
-sudo apt update
-sudo apt install build-essential pkg-config curl wget file \
-  libwebkit2gtk-4.1-dev libssl-dev libxdo-dev \
-  libayatana-appindicator3-dev librsvg2-dev patchelf \
-  gstreamer1.0-libav gstreamer1.0-plugins-good \
-  gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
 ```
-
-From the project directory:
-
-```bash
-npm ci
-npm run check
-npm run tauri dev
+npm install
+npm run tauri build
 ```
-
-Use `tauri dev` to test native file selection and drag-and-drop; `npm run dev`
-alone only serves the frontend in a browser.
-
-To build a Linux Debian package:
-
-```bash
-npm run tauri build -- --bundles deb
-```
-
-The installer is written to `src-tauri/target/release/bundle/deb/`.
-Video format support depends on the system's GStreamer codecs and WebKitGTK;
-test playback, seeking, and 360-degree mouse navigation with your own media.
-Build on the oldest Linux distribution you intend to support, since binaries
-built on Ubuntu 26.04 may require newer system libraries than older releases.
-
-For other platforms and bundle formats, install the
-[Tauri 2 prerequisites](https://v2.tauri.app/start/prerequisites/) and run
-`npm run tauri build`. Packages are written to `src-tauri/target/release/bundle/`.
+3. The built files will be available in the `360-video-player\src-tauri\target\release` directory. 

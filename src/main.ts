@@ -1,9 +1,8 @@
 import "./styles.css";
 import App from "./App.svelte";
 
-const target = document.getElementById("app");
-if (!target) throw new Error("Missing app element");
-
-const app = new App({ target });
+const app = new App({
+  target: document.getElementById("app"),
+});
 
 export default app;
