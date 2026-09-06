@@ -1,5 +1,12 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
   export let path: string;
+  onDestroy(() => {
+    // Release the VR renderer/decoder before the plain-video diagnostic test.
+    const playerWindow = window as Window & { player?: { dispose: () => void } };
+    playerWindow.player?.dispose();
+    delete playerWindow.player;
+  });
 </script>
 
 
@@ -19,7 +26,7 @@
     disablePictureInPicture
     preload="auto"
   >
-    <source src={path} type="video/mp4" />
+    <source src={path} />
   </video>
 </div>
 

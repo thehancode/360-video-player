@@ -1,9 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from "svelte";
-  import { open } from "@tauri-apps/api/dialog";
-  import { convertFileSrc } from "@tauri-apps/api/tauri";
-  import { listen } from "@tauri-apps/api/event";
-  let container: HTMLDivElement;
+  import { open } from "@tauri-apps/plugin-dialog";
+  import { convertFileSrc } from "@tauri-apps/api/core";
+  import { getCurrentWebview } from "@tauri-apps/api/webview";
 
   const dispatch = createEventDispatcher();
 
@@ -35,39 +34,40 @@
   }
 
   onMount(() => {
-    container.addEventListener("click", handleFileSelect);
-
-    listen("tauri://file-drop", async (event: any) => {
-      if (event.payload.length === 0) {
-        console.warn("No file dropped");
-        return;
+    let disposed = false;
+    let unlisten: (() => void) | undefined;
+    getCurrentWebview().onDragDropEvent((event) => {
+      if (event.payload.type === "drop" && event.payload.paths[0]) {
+        dispatch("pathSelected", convertFileSrc(event.payload.paths[0]));
       }
-      console.log("File dropped", event.payload[0]);
-      const file = event.payload[0];
-      const fileURL = convertFileSrc(file);
-      dispatch("pathSelected", fileURL);
-    });
-
-    container.addEventListener("dragover", (event: DragEvent) => {
-      event.preventDefault();
-      event.stopPropagation();
-    });
+    }).then((stop) => {
+      if (disposed) stop();
+      else unlisten = stop;
+    }).catch((error) => console.error("Error listening for dropped files:", error));
+    return () => {
+      disposed = true;
+      unlisten?.();
+    };
   });
 </script>
 
 <div>
-  <div class="container" bind:this={container}>
+  <button type="button" class="container" on:click={handleFileSelect}>
     <div class="item-logo">
       <img class="logo" src="/logo.svg" alt="Logo" />
     </div>
     <div class="item-text">
       <div class="item">Click or drop file to play here.</div>
     </div>
-  </div>
+  </button>
 </div>
 
 <style>
   .container {
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
     margin: 0;
     display: flex;
     height: 100vh;

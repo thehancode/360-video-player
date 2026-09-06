@@ -1,57 +1,47 @@
 {
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "360-video-player",
+  "mainBinaryName": "360-video-player",
+  "version": "1.0.2",
+  "identifier": "com.hancode.360-video-player",
   "build": {
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist"
+    "devUrl": "http://localhost:1420",
+    "frontendDist": "../dist"
   },
-  "package": {
-    "productName": "360-video-player",
-    "version": "1.0.2"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
-      },
-      "fs": {
-        "all": true,
-        "scope": [
-          "$APP/*",
-          "$DESKTOP/*"
-        ]
-      },
-      "dialog": {
-        "all": true
-      },
-      "protocol": {
-        "all": true,
-        "asset": true,
-        "assetScope": [
-          "*"
-        ]
-      }
-    },
+  "app": {
     "windows": [
       {
+        "label": "main",
         "title": "360-video-player"
       }
     ],
     "security": {
-      "csp": " default-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src unsafe-inline 'self' https://* asset: https://asset.localhost tauri://localhost; media-src https://* asset: https://asset.localhost tauri://localhost; style-src-elem 'unsafe-inline' https://* asset: https://asset.localhost tauri://localhost; script-src-elem 'unsafe-inline' https://* asset: https://asset.localhost tauri://localhost;"
-    },
-    "bundle": {
-      "active": true,
-      "targets": "all",
-      "identifier": "com.hancode.360-video-player",
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/256x256.png",
-        "icons/icon.ico"
-      ]
+      "csp": "default-src 'self'; connect-src 'self' ipc: http://ipc.localhost asset: http://asset.localhost https://asset.localhost; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' asset: http://asset.localhost https://asset.localhost blob:; worker-src 'self' blob:",
+      "assetProtocol": {
+        "enable": true,
+        "scope": []
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/256x256.png",
+      "icons/icon.ico"
+    ],
+    "linux": {
+      "deb": {
+        "depends": [
+          "gstreamer1.0-plugins-good",
+          "gstreamer1.0-plugins-bad",
+          "gstreamer1.0-libav"
+        ]
+      }
     }
   }
 }
