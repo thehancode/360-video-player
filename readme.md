@@ -58,6 +58,36 @@ npm run tauri build -- --bundles deb
 The installer is written to `src-tauri/target/release/bundle/deb/`.
 Video format support depends on the system's GStreamer codecs and WebKitGTK;
 test playback, seeking, and 360-degree mouse navigation with your own media.
+
+On Linux, picked and dropped videos stream through a built-in HTTP server on
+`127.0.0.1` at an automatically assigned port. This works around WebKit/GStreamer
+failures loading local videos through Tauri's `asset://` protocol. No separate
+server or internet connection is needed. The server exposes only the selected
+file through a random URL, checks Tauri's picker/drop file scope, and supports
+byte ranges for seeking without loading the entire video into memory. Selecting
+another file invalidates the old URL; the server exits with the app. Windows and
+macOS continue to use Tauri's asset protocol.
+
+Linux startup also defaults `WEBKIT_GST_DISABLE_GL_SINK=1`. On the tested AMD /
+Wayland system with WebKitGTK 2.52.6, the GStreamer GL video sink produced corrupt
+pixels when decoded video frames were used by canvas and WebGL. WebKit's fallback
+video sink fixed the frame-to-texture test while leaving WebGL available for the
+360-degree renderer. This may increase CPU usage. The app respects an existing
+value; to compare the accelerated video sink on other drivers or newer WebKit:
+
+```bash
+WEBKIT_GST_DISABLE_GL_SINK=0 npm run tauri dev
+```
+
+Fully restart the app when changing this setting. This workaround does not
+require transcoding files or changing the desktop session from Wayland to X11.
+
+To verify the Linux workaround, run `npm run tauri dev`, open a video with the
+picker, check playback and seeking near the end, then return to the selector
+and repeat with drag and drop. Check 360-degree mouse navigation as well; the
+existing **Test plain video** button can isolate decoding from VR rendering.
+The diagnostics should show an `http://127.0.0.1:…/video/…` source for local files.
+
 Build on the oldest Linux distribution you intend to support, since binaries
 built on Ubuntu 26.04 may require newer system libraries than older releases.
 

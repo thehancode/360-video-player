@@ -1,10 +1,27 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from "svelte";
   import { open } from "@tauri-apps/plugin-dialog";
-  import { convertFileSrc } from "@tauri-apps/api/core";
+  import { convertFileSrc, invoke } from "@tauri-apps/api/core";
   import { getCurrentWebview } from "@tauri-apps/api/webview";
 
   const dispatch = createEventDispatcher();
+  let loading = false;
+  let errorMessage = "";
+
+  async function loadFile(path: string) {
+    if (loading) return;
+    loading = true;
+    errorMessage = "";
+    try {
+      const url = await invoke<string | null>("local_video_url", { path });
+      dispatch("pathSelected", url ?? convertFileSrc(path));
+    } catch (error) {
+      errorMessage = `Could not open video: ${String(error)}`;
+      console.error(errorMessage);
+    } finally {
+      loading = false;
+    }
+  }
 
   async function handleFileSelect() {
     try {
@@ -26,10 +43,10 @@
         return;
       }
 
-      const fileURL = convertFileSrc(selected);
-      dispatch("pathSelected", fileURL);
+      await loadFile(selected);
     } catch (error) {
       console.error("Error selecting file:", error);
+      errorMessage = `Could not select video: ${String(error)}`;
     }
   }
 
@@ -38,7 +55,7 @@
     let unlisten: (() => void) | undefined;
     getCurrentWebview().onDragDropEvent((event) => {
       if (event.payload.type === "drop" && event.payload.paths[0]) {
-        dispatch("pathSelected", convertFileSrc(event.payload.paths[0]));
+        void loadFile(event.payload.paths[0]);
       }
     }).then((stop) => {
       if (disposed) stop();
@@ -52,17 +69,21 @@
 </script>
 
 <div>
-  <button type="button" class="container" on:click={handleFileSelect}>
+  <button type="button" class="container" on:click={handleFileSelect} disabled={loading}>
     <div class="item-logo">
       <img class="logo" src="/logo.svg" alt="Logo" />
     </div>
     <div class="item-text">
-      <div class="item">Click or drop file to play here.</div>
+      <div class="item">{loading ? "Opening video…" : "Click or drop file to play here."}</div>
     </div>
   </button>
+  {#if errorMessage}
+    <p class="error" role="alert">{errorMessage}</p>
+  {/if}
 </div>
 
 <style>
+  .error { position: fixed; bottom: 1rem; left: 1rem; right: 1rem; color: #fff; background: #7a2222; padding: 1rem; }
   .container {
     border: 0;
     padding: 0;
