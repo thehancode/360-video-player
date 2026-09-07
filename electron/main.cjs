@@ -77,11 +77,12 @@ const VIDEO_EXTENSIONS = new Set(['.mp4', '.webm', '.mkv', '.m4v', '.mov', '.ogv
 function getVideoArg() {
   const args = process.argv.slice(isDevelopment ? 2 : 1);
   for (const arg of args) {
-    if (arg.startsWith('-')) continue;
+    if (typeof arg !== 'string' || arg.length === 0 || arg.length > 4096) continue;
+    if (arg.startsWith('-') || arg.includes('\0')) continue;
     const ext = extname(arg).toLowerCase();
-    if (VIDEO_EXTENSIONS.has(ext) && existsSync(arg)) {
-      return resolve(arg);
-    }
+    if (!VIDEO_EXTENSIONS.has(ext) || !existsSync(arg)) continue;
+    const resolved = resolve(arg);
+    if (statSync(resolved).isFile()) return resolved;
   }
   return null;
 }
