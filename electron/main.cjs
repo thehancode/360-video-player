@@ -105,6 +105,7 @@ function createWindow() {
     title: '360 Video Player',
     width: 1280,
     height: 720,
+    frame: false,
     backgroundColor: '#3b3b3b',
     autoHideMenuBar: true,
     webPreferences: {
@@ -113,6 +114,27 @@ function createWindow() {
       sandbox: true,
       preload: join(__dirname, 'preload.cjs'),
     },
+  });
+
+  window.webContents.on('before-input-event', (event, input) => {
+    if (input.type !== 'keyDown') return;
+    if (input.control || input.alt || input.meta) return;
+
+    const key = input.key?.toLowerCase();
+    if (key === 'i' || input.code === 'KeyI') {
+      event.preventDefault();
+      window.minimize();
+    } else if (key === 'o' || input.code === 'KeyO') {
+      event.preventDefault();
+      if (window.isMaximized()) {
+        window.unmaximize();
+      } else {
+        window.maximize();
+      }
+    } else if (key === 'p' || input.code === 'KeyP') {
+      event.preventDefault();
+      window.close();
+    }
   });
 
   if (isDevelopment) {
@@ -209,6 +231,28 @@ app.whenReady().then(() => {
     if (!isTrustedSender(event)) return null;
     const initialPath = getVideoArg();
     return initialPath ? mediaURL(initialPath) : null;
+  });
+
+  ipcMain.handle('window:minimize', (event) => {
+    if (!isTrustedSender(event)) return;
+    const win = BrowserWindow.fromWebContents(event.sender);
+    win?.minimize();
+  });
+
+  ipcMain.handle('window:maximize', (event) => {
+    if (!isTrustedSender(event)) return;
+    const win = BrowserWindow.fromWebContents(event.sender);
+    if (win?.isMaximized()) {
+      win.unmaximize();
+    } else {
+      win?.maximize();
+    }
+  });
+
+  ipcMain.handle('window:close', (event) => {
+    if (!isTrustedSender(event)) return;
+    const win = BrowserWindow.fromWebContents(event.sender);
+    win?.close();
   });
 
   createWindow();

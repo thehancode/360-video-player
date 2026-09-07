@@ -11,5 +11,8 @@ contextBridge.exposeInMainWorld('videoPlayer', {
     }
   },
   getInitialVideo: () => ipcRenderer.invoke('video:get-initial-video'),
+  minimizeWindow: () => ipcRenderer.invoke('window:minimize'),
+  toggleMaximizeWindow: () => ipcRenderer.invoke('window:maximize'),
+  closeWindow: () => ipcRenderer.invoke('window:close'),
 });
 

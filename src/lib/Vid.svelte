@@ -25,6 +25,43 @@
 
   $: mimeType = getMimeType(path);
 
+  function handleWheel(event: WheelEvent) {
+    if (!window.vr?.camera || !window.vr?.controls3d?.orbit) return;
+
+    event.preventDefault();
+
+    let deltaX = event.deltaX;
+    let deltaY = event.deltaY;
+
+    if (event.deltaMode === 1) {
+      // Lines
+      deltaX *= 20;
+      deltaY *= 20;
+    } else if (event.deltaMode === 2) {
+      // Pages
+      deltaX *= 200;
+      deltaY *= 200;
+    }
+
+    // 1. Vertical scroll (deltaY): Zoom In (scroll up) / Zoom Out (scroll down)
+    // Normal 3D FOV range: 30 deg (close up) to 110 deg (wide angle)
+    if (Math.abs(deltaY) > 0.01) {
+      const camera = window.vr.camera;
+      const zoomSensitivity = 0.035;
+      const targetFov = camera.fov + deltaY * zoomSensitivity;
+      camera.fov = Math.max(30, Math.min(110, targetFov));
+      camera.updateProjectionMatrix();
+    }
+
+    // 2. Horizontal scroll (deltaX): Move camera left / right
+    if (Math.abs(deltaX) > 0.01) {
+      const orbit = window.vr.controls3d.orbit;
+      const rotateSensitivity = 0.0015;
+      orbit.rotateLeft(deltaX * rotateSensitivity);
+      orbit.update();
+    }
+  }
+
   onMount(async () => {
     while (typeof (window as any).videojs !== "function") {
       await new Promise((r) => setTimeout(r, 10));
@@ -59,9 +96,12 @@
     }
 
     window.vr = player.vr({ projection: "AUTO", debug: false, forceCardboard: false });
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
   });
 
   onDestroy(() => {
+    window.removeEventListener("wheel", handleWheel);
     if (typeof window !== "undefined" && window.player) {
       try {
         window.player.dispose();
